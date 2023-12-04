@@ -4,8 +4,8 @@ import re
 symbols = re.compile(r'[^.\d]')
 
 # This function returns an array of lines from the given file
-def getLinesFromFile(folder):
-  path = os.path.join(os.getcwd(), folder, "_input.txt")
+def getLinesFromFile(folder, example = False):
+  path = os.path.join(os.getcwd(), folder, "_input.txt" if example == False else "_example.txt")
   file = open(path, 'r')
   return file.readlines()
 

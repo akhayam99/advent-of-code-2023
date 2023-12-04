@@ -32,3 +32,5 @@ for i, line in enumerate(lines):
             result += int(merged[0]) * int(merged[1])
 
 print(result)
+
+# Answer: 84584891

@@ -1,5 +1,4 @@
 import sys
-import re
 sys.path.append('/Users/aminkhayam/GIT/private/advent-of-code-2023/utils')
 
 from utils import getLinesFromFile, getNumbers

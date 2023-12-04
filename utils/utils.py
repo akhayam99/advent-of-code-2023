@@ -1,7 +1,7 @@
 import os
 
 def getLinesFromFile(folder):
-  path = os.path.join(os.getcwd(), folder, "input.txt")
+  path = os.path.join(os.getcwd(), folder, "_input.txt")
   file = open(path, 'r')
   return file.readlines()
 

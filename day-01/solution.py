@@ -7,9 +7,11 @@ from utils import getLinesFromFile
 
 # Strips the newline character
 pattern = re.compile(r'\d')
-sum = 0
+result = 0
 for line in getLinesFromFile("day-01"):
     matches = pattern.findall(line)
-    sum += int(matches[0] + "" + matches[len(matches) - 1])
+    result += int(matches[0] + "" + matches[len(matches) - 1])
 
-print(sum)
+print(result)
+
+# Answer: 55447

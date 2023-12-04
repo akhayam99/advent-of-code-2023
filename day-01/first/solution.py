@@ -8,7 +8,7 @@ from utils import getLinesFromFile
 # Strips the newline character
 pattern = re.compile(r'\d')
 sum = 0
-for line in getLinesFromFile("day-01/first"):
+for line in getLinesFromFile("day-01"):
     matches = pattern.findall(line)
     sum += int(matches[0] + "" + matches[len(matches) - 1])
 

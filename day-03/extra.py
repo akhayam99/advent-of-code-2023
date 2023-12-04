@@ -2,7 +2,7 @@ import sys
 import re
 sys.path.append('/Users/aminkhayam/GIT/private/advent-of-code-2023/utils')
 
-from utils import getLinesFromFile, getArrayOfNumbers, extractNumbersFromRow
+from utils import getLinesFromFile, getNumbers, extractNumbersFromRow
 
 result = 0
 lines = getLinesFromFile("day-03")
@@ -18,12 +18,12 @@ for i, line in enumerate(lines):
         tops, bottoms, sides = [], [], []
 
         if(i > 0):
-            tops = getArrayOfNumbers(extractNumbersFromRow(lines, i - 1, start, end))
+            tops = getNumbers(extractNumbersFromRow(lines, i - 1, start, end))
 
         if(i < len(lines) - 1):
-            bottoms = getArrayOfNumbers(extractNumbersFromRow(lines, i + 1, start, end))
+            bottoms = getNumbers(extractNumbersFromRow(lines, i + 1, start, end))
 
-        sides = getArrayOfNumbers(extractNumbersFromRow(lines, i, start, end))
+        sides = getNumbers(extractNumbersFromRow(lines, i, start, end))
         j += 2
 
         merged = tops + sides + bottoms

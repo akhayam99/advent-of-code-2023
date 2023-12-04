@@ -36,7 +36,7 @@ def hasSymbolsAround(lines, index, start, end):
   return symbols.search(lines[index][start:end]) != None
 
 # This function returns an array of numbers that are in the given line
-def getArrayOfNumbers(line):
+def getNumbers(line):
     return re.compile(r'\d+').findall(line)
 
 
@@ -60,8 +60,14 @@ def extractNumbersFromRow(lines, i, start, end):
 
 def getNewMaxValue(line, reg, max):
     for match in reg.findall(line):
-        new_value = int(getArrayOfNumbers(reg.findall(match)[0])[0])
+        new_value = int(getNumbers(reg.findall(match)[0])[0])
         if(new_value > max):
             max = new_value
 
     return max
+
+def findAll(reg, line):
+    return reg.findall(line)
+
+def findFirst(reg, line):
+    return re.compile(reg).findall(line)[0]

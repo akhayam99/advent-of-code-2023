@@ -2,21 +2,16 @@ import sys
 import re
 sys.path.append('/Users/aminkhayam/GIT/private/advent-of-code-2023/utils')
 
-from utils import getLinesFromFile, getArrayOfNumbers
+from utils import getLinesFromFile, getNumbers
 
 result = 0
-lines = getLinesFromFile("day-04")
-
-played = re.compile(r':\s(.*?)\s\|')
-extracted = re.compile(r'\|\s(.*?)$')
 
 for line in getLinesFromFile("day-04"):
-
-    extractedNumbers = getArrayOfNumbers(extracted.findall(line)[0])
     points = 0
+    played, extracted = map(getNumbers, line.split(':')[1].split('|'))
 
-    for number in getArrayOfNumbers(played.findall(line)[0]):
-        if number in extractedNumbers:
+    for number in played:
+        if number in extracted:
             points = 1 if points == 0 else points * 2
 
     result += points

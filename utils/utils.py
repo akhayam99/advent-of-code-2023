@@ -56,3 +56,12 @@ def extractNumbersFromRow(lines, i, start, end):
             after += 1
 
     return number
+
+
+def getNewMaxValue(line, reg, max):
+    for match in reg.findall(line):
+        new_value = int(getArrayOfNumbers(reg.findall(match)[0])[0])
+        if(new_value > max):
+            max = new_value
+
+    return max

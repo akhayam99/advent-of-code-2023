@@ -28,3 +28,5 @@ for seed in seeds:
         min = seed
 
 print(min)
+
+# Answer: 403695602

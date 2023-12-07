@@ -6,7 +6,7 @@ from utils import getLinesFromFile
 result = 0
 lines = getLinesFromFile("day-04")
 
-for line in getLinesFromFile("day-04"):
+for line in lines:
     print("do things here")
 
 print(result)

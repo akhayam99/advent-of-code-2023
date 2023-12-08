@@ -19,16 +19,15 @@ for line in lines:
         myMatches.append(values[0])
 
 succeded = []
-counter, index = 1, 0
+counter, pathIndex = 0, 0
 while len(succeded) != len(myMatches):
-    index = 0 if index >= len(paths) else index
+    counter += 1
     for i, match in enumerate(myMatches):
         combination = next((arr[match] for arr in myMap if match in arr), None)
-        prevMatch = myMatches[i]
-        myMatches[i] = combination[1] if paths[index] == "R" else combination[0]
+        myMatches[i] = combination[1] if paths[pathIndex] == "R" else combination[0]
         if(myMatches[i].endswith('Z')):
             succeded.append(counter)
-    index += 1; counter += 1
+    pathIndex = pathIndex + 1 if pathIndex + 1 < len(paths) else 0
 
 print(print(math.lcm(*succeded)))
 

@@ -3,7 +3,8 @@ sys.path.append('/Users/aminkhayam/GIT/private/advent-of-code-2023/utils')
 
 from utils import getLinesFromFile
 
-for line in getLinesFromFile("inputs"):
+result = 0
+for line in getLinesFromFile("day-09"):
     items = [int(x) for x in line.replace('\n', '').split(' ')]
 
     while any(items):

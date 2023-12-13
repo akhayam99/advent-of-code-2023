@@ -71,3 +71,6 @@ def findAll(reg, line):
 
 def findFirst(reg, line):
     return re.compile(reg).findall(line)[0]
+
+def printResult(result):
+    print(f'\n---------------- Result: {result} ----------------\n')

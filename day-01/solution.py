@@ -1,17 +1,8 @@
-import sys
-import re
+import sys, re
 sys.path.append('/Users/aminkhayam/GIT/private/advent-of-code-2023/utils')
 
-from utils import getLinesFromFile
+from utils import getLinesFromFile as GL, printResult
 
-
-# Strips the newline character
-pattern = re.compile(r'\d')
-result = 0
-for line in getLinesFromFile("day-01"):
-    matches = pattern.findall(line)
-    result += int(matches[0] + "" + matches[len(matches) - 1])
-
-print(result)
+printResult(sum([int((el := re.compile(r'\d').findall(l))[0] + "" + el[len(el) - 1]) for l in GL("day-01")]))
 
 # Answer: 55447

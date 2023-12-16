@@ -3,87 +3,41 @@ sys.path.append('/Users/aminkhayam/GIT/private/advent-of-code-2023/utils')
 
 from utils import getLinesFromFile
 
-lines = getLinesFromFile("day-10")
-
-pattern = re.compile(r'[\w\W]')
-
-matrix = []
-
-startIndex = ""
-for index, line in enumerate(lines):
-    matrix.append(pattern.findall(line.replace("\n", "")))
-    if(matrix[index].count("S") > 0):
-        startIndex = [index, matrix[index].index("S")]
-
-validDirections = [
-    {
-        "L": ["down-right", "left-up"]
-    },
-    {
-        "F": ["up-right", "left-down"]
-    },
-    {
-        "7": ["up-left", "right-down"]
-    },
-    {
-        "J": ["down-left", "right-up"]
-    },
-    {
-        "|": ["down-down", "up-up"]
-    },
-    {
-        "-": ["left-left", "right-right"]
-    }
+lines = getLinesFromFile('day-10')
+valid_directions = [
+    { 'L': ['d-r', 'l-u'] }, { 'F': ['u-r', 'l-d'] }, { '7': ['u-l', 'r-d'] },
+    { 'J': ['d-l', 'r-u'] }, { '|': ['d-d', 'u-u'] }, { '-': ['l-l', 'r-r'] }
 ]
 
-sequences = ["up", "right", "down", "left"]
+def updatePath(path, direction):
+    match direction:
+        case 'u': path[0] -= 1
+        case 'r': path[1] += 1
+        case 'd': path[0] += 1
+        case 'l': path[1] -= 1
+    return path
 
-for sequence in sequences:
-    char = "*"
-    direction = sequence
-    distance = 1
-    path = [startIndex[0], startIndex[1]]
+matrix = [re.compile(r'[\w\W]').findall(line.replace('\n', '')) for line in lines]
+initial = [i, matrix[i].index('S')] if (i := next((i for i, line in enumerate(lines) if line.count('S') > 0), None)) != None else None
 
-    while(char != "S"):
+for sequence in ['u', 'r', 'd', 'l']:
+    dist = 1
+    path = updatePath([initial[0], initial[1]], sequence)
+    item = matrix[path[0]][path[1]]
 
-        if char == "*":
-            if direction == "up" and path[0] - 1 >= 0:
-                path[0] -= 1
-            if direction == "right" and path[1] + 1 < len(matrix[path[0]]):
-                path[1] += 1
-            if direction == "down" and path[0] + 1 < len(matrix):
-                path[0] += 1
-            if direction == "left" and path[1] - 1 >= 0:
-                path[1] -= 1
-            char = matrix[path[0]][path[1]]
-
-        if((directions := next((arr[char] for arr in validDirections if char in arr), None)) == None):
+    while (item := matrix[path[0]][path[1]]) != 'S' and sequence != None:
+        if((dirs := next((arr[item] for arr in valid_directions if item in arr), None)) == None):
             break
 
-        temp_direction = None
-        for value in directions:
-            from_direction, to_direction = value.split("-")
-            if from_direction == direction:
-                temp_direction = to_direction
-                if temp_direction == "up":
-                    path[0] -= 1
-                if temp_direction == "right":
-                    path[1] += 1
-                if temp_direction == "down":
-                    path[0] += 1
-                if temp_direction == "left":
-                    path[1] -= 1
+        for value in dirs:
+            v1, v2 = value.split('-')
+            path = updatePath(path, sequence := v2) if v1 == sequence else path
 
-        if temp_direction == None:
-            break
+        dist += 1
 
-        char = matrix[path[0]][path[1]]
-        direction = temp_direction
-        distance += 1
-
-    if char == "S":
+    if item == 'S':
         break
 
-print(distance // 2)
+print(dist // 2)
 
 # Answer: 7063
